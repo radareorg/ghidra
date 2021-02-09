@@ -71,7 +71,15 @@ typedef char int1;
 typedef uint8 uintp;
 #endif
 
-#if (defined (__linux__) || defined (__FreeBSD__) || defined (__OpenBSD__)) && (defined (__i386__) || defined (__arm__))
+#if defined(__mips__)
+#if __mips == 64
+#define __MIPS64__ 1
+#else
+#define __MIPS32__ 1
+#endif
+#endif
+
+#if (defined (__linux__) || defined (__FreeBSD__) || defined (__OpenBSD__)) && (defined (__MIPS32__) || defined (__i386__) || defined (__arm__))
 #if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
 #define HOST_ENDIAN 1
 #else
@@ -90,7 +98,7 @@ typedef char int1;
 typedef uint4 uintp;
 #endif
 
-#if (defined (__linux__) || defined (__FreeBSD__) || defined (__OpenBSD__)) && (defined (__x86_64__) || defined (__aarch64__))
+#if (defined (__linux__) || defined (__FreeBSD__) || defined (__OpenBSD__)) && (defined (__MIPS64__) || defined (__x86_64__) || defined (__aarch64__))
 #if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
 #define HOST_ENDIAN 1
 #else
